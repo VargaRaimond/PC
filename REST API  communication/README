@@ -1,0 +1,44 @@
+ 
+			Homework 3 PC
+
+	Group: 325CA
+	Name: Raimond Varga
+	Programming language: C++
+
+		General functionality
+
+	I've written my client in C++ using c++11. For json files I used nlohmann's
+	json library[1]. I also used files already written by the PC team such as:
+	buffer.cpp, buffer.h, helpers.h, helpers.cpp, requests.h. The requests.cpp
+	file is the one I've written for the HTTP lab, with some differences - I
+	modified both functions so they take an authorization key, if it exists,
+	and also I modified the compute_get_function to be also able to compute
+	delete messages.
+	Most of my work is done in client.cpp. I created a function that interprets
+	a command from a user and calls all other functions, every single one dealing
+	with one command type from parsing json files, to computing messages for
+	server and managing all errors.
+	I have static variables for my session_cookie and authorization_key, so I can
+	keep them and update them after every new specific command.
+	I also tried to combine commands that create almost the same messages in the
+	same function, so I wouldn't have duplicated code - login and register,
+	get_book and delete_book. I didn't do it for all the commands because I
+	wanted to have a more clear code and every function to have only one role.
+
+
+		Error management
+
+	Because I tried using json files as much as I could, I also used them when
+	printing errors. I received a message from server for every type of command
+	and I extracted the error json, if it existed. I formated it and printed it
+	so the client will know what he's done wrong. For most commands, the server
+	returns straight forward errors. But, for the one with authorization header,
+	I also added another error message, with possible cause for that error.
+	In the client, I only make sure that the id and page_count are positive
+	numbers, so as to be sure the input format is respected. 
+
+		Documentation
+
+	[1]https://github.com/nlohmann/json;
+	https://ocw.cs.pub.ro/courses/pc/laboratoare/10
+	I also used the forum for this homework.
